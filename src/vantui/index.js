@@ -1,5 +1,7 @@
 import Vue from 'vue'
-import { Button, Search } from 'vant'
+import { Search, Swipe, SwipeItem, Popup } from 'vant'
 
-Vue.use(Button)
 Vue.use(Search)
+Vue.use(Swipe)
+Vue.use(SwipeItem)
+Vue.use(Popup)
