@@ -1,8 +1,18 @@
 <template>
   <div id="app">
     <router-view/>
+    <app-tab-bar v-show="$route.meta.isShowTabBar"/>
   </div>
 </template>
+
+<script>
+import AppTabBar from '@/components/AppTabBar.vue'
+export default {
+  components: {
+    AppTabBar
+  }
+}
+</script>
 
 <style lang="less">
 #app {
