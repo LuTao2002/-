@@ -16,8 +16,8 @@
     <!-- /搜索区 -->
     <!-- 分类区 -->
     <div class="row-box">
-      <van-row>
-        <van-col span="5">
+      <div class="div-row">
+        <div class="div-col-left">
           <van-sidebar v-model="activeKey" class="sidebar">
             <van-sidebar-item
               v-for="item in categoryList"
@@ -26,8 +26,8 @@
               @click="onItem(item.id)"
             />
           </van-sidebar>
-        </van-col>
-        <van-col span="19">
+        </div>
+        <div class="div-col-right">
           <div class="img-box">
             <img
               :src="currentCategory.banner_url"
@@ -52,8 +52,8 @@
               <div>{{ item.name }}</div>
             </van-grid-item>
           </van-grid>
-        </van-col>
-      </van-row>
+        </div>
+      </div>
     </div>
 
     <!-- /分类区 -->
@@ -73,6 +73,7 @@ export default {
   },
   created() {
     this.GetCategoryDataList();
+    // document.querySelector('#app').style.background = '#fff'
   },
   methods: {
     async GetCategoryDataList() {
@@ -95,13 +96,25 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.box {
+  height: 91vh;
+}
 .row-box {
-  min-height: 100%;
-  background-color: #fff;
-  padding-bottom: 10%;
+  height: 91vh;
+  .div-row {
+    display: flex;
+    min-height: 100%;
+    .div-col-left {
+      background-color: #f7f8fa;
+      min-height: 100%;
+    }
+    .div-col-right {
+      background-color: #fff;
+      min-height: 100%;
+    }
+  }
 }
 .sidebar {
-  padding-bottom: 30%;
   background-color: #f7f8fa;
 }
 .img-box {

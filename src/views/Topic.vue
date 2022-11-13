@@ -53,7 +53,8 @@ export default {
         }
       }
       this.GetTopicDataList()
-      this.$router.go(0)
+      document.getElementById("app").scrollIntoView()
+      // this.$router.go(0)
     }
   }
 }

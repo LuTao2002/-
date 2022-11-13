@@ -111,7 +111,6 @@ export default {
           this.issue = issue;
           this.productList = res.data.data.productList
           this.goodsData();
-          console.log(res.data);
         }
       });
     },
@@ -174,7 +173,6 @@ export default {
     },
     onBuyClicked(skuData) {
       this.$toast.fail('暂未开发')
-      console.log("@@",skuData.selectedNum);
     },
     // 加购
     async onAddCartClicked(skuData) {

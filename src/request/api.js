@@ -106,3 +106,10 @@ export const GetDeleteCart = data => request({
     url: '/cart/delete',
     data
 })
+
+// 修改加购数量
+export const GetUpdateCart = data => request({
+    method: 'POST',
+    url: '/cart/update',
+    data
+})

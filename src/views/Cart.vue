@@ -16,7 +16,7 @@
               :class="editBtn ? 'goods-card' : ''"
               :thumb="item.list_pic_url"
             />
-            <van-stepper v-show="editBtn" class="stepper" v-model="item.number" />
+            <van-stepper v-show="editBtn" @change="onChange(item.id)" class="stepper" v-model="item.number" />
             <template #right>
               <van-button
                 square
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { GetCartData, GetDeleteCart } from "@/request/api";
+import { GetCartData, GetDeleteCart, GetUpdateCart } from "@/request/api";
 import Tips from "@/components/Tips.vue";
 export default {
   name: 'Cart',
@@ -74,9 +74,7 @@ export default {
         const { data } = await GetCartData();
         this.cartList = data.data.cartList
         this.isShow = false
-        console.log(data);
         this.price()
-        console.log(typeof this.cartList[0].retail_price);
       } catch (err) {
         this.isShow = true
         this.$toast.fail("暂无加购商品");
@@ -91,7 +89,6 @@ export default {
         num += res.market_price * res.number
       })
       this.priceNum = num * 100
-      console.log(num)
     },
     async onDelete(id) { // 删除加购
       try {
@@ -105,6 +102,31 @@ export default {
       setTimeout(() => {
         this.GetCartDataList()
       }, 500)
+    },
+    // 修改商品数量
+    async onChange(id) {
+      this.$toast.loading('修改中...')
+      let number = 0
+      let productId = 0
+      let goodsId = 0
+      this.cartList.forEach(item => {
+        if (item.id === id) {
+          number = item.number
+          productId = item.product_id
+          goodsId = item.goods_id
+        }
+      })
+      try {
+        await GetUpdateCart({
+          goodsId,
+          id,
+          number,
+          productId
+        })
+        this.price()
+      } catch (err) {
+        this.$toast.fail('修改失败')
+      }
     },
     onCheck() {
       if (this.result.length === this.cartList.length) {
